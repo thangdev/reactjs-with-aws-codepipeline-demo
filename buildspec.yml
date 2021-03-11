@@ -1,0 +1,29 @@
+version: 0.2
+
+phases:
+  install:
+    commands:
+      #install Node 12
+      - echo Installling Node 12 ...
+      - curl -fsSL https://deb.nodesource.com/setup_12.x |  bash -
+      - apt-get install -y nodejs
+        #install Yarn
+      - echo Installling yarn ///
+      - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg |  apt-key add -
+      - apt install --no-install-recommends yarn
+
+  pre_build:
+    commands:
+      #install dependencies
+      - echo Installing dependencies...
+      - yarn
+  build:
+    commands:
+      #build
+      - echo Building.....
+      - yarn build
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: dist
